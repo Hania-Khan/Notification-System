@@ -1,0 +1,21 @@
+version: "3.8"
+
+services:
+  app:
+    build: .
+    image: notificationservice-image
+    ports:
+      - "4002:4001"
+    volumes:
+      - ./:/app
+      - /app/node_modules
+    environment:
+      MONGO_URI: mongodb://user:user123@mongo:27017/
+      APP_PORT: 4001
+      JWT_SECRET: 3f@9!kL2$zX8^pQwR&7*YtN0oV!mJd
+    networks:
+      - shared-network  # Use the shared network
+
+networks:
+  shared-network:
+    external: true  # Ensure the network is defined externally
